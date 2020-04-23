@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.example.lifecycle.ui.fragment.TopViewModel" />
+
+        <import type="com.example.lifecycle.ui.fragment.EditMode" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_global_close" />
+
+            <ImageView
+                android:id="@+id/image_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_color_lens_black_24dp" />
+
+            <TextView
+                android:id="@+id/image_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="重置"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_crop"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="DC"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/time_zero"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="时零"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_tf"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="截断"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_potential"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="电位"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_derivation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="垂直推导"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_background"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="平滑"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_frequency"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="频率域"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/image_measure"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="测量"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.example.lifecycle.ui.customview.GPRImageView
+                android:id="@+id/matrix"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="200dp"
+                android:layout_marginBottom="60dp"
+                android:background="@color/background"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.lifecycle.ui.customview.VerticalLine
+                android:id="@+id/line_image"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:visibility="@{data.editMode == EditMode.Measure ? View.GONE :View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/matrix"
+                app:layout_constraintLeft_toLeftOf="@id/matrix"
+                app:layout_constraintRight_toRightOf="@id/matrix"
+                app:layout_constraintTop_toTopOf="@id/matrix" />
+
+            <com.example.lifecycle.ui.customview.VerticalLine
+                android:id="@+id/left_vertical_line"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="200dp"
+                android:visibility="@{data.editMode == EditMode.Measure ? View.VISIBLE :View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/matrix"
+                app:layout_constraintRight_toRightOf="@id/matrix"
+                app:layout_constraintTop_toTopOf="@id/matrix" />
+
+            <com.example.lifecycle.ui.customview.VerticalLine
+                android:id="@+id/right_vertical_line"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="200dp"
+                android:visibility="@{data.editMode == EditMode.Measure ? View.VISIBLE :View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/matrix"
+                app:layout_constraintLeft_toLeftOf="@id/matrix"
+                app:layout_constraintTop_toTopOf="@id/matrix" />
+
+            <com.example.lifecycle.ui.customview.HorizontalLine
+                android:id="@+id/left_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="50dp"
+                android:visibility="@{data.editMode == EditMode.Measure ? View.VISIBLE :View.GONE}"
+                app:layout_constraintLeft_toLeftOf="@id/matrix"
+                app:layout_constraintRight_toRightOf="@id/matrix"
+                app:layout_constraintTop_toTopOf="@id/matrix" />
+
+
+            <com.example.lifecycle.ui.customview.HorizontalLine
+                android:id="@+id/right_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="@{data.editMode == EditMode.Measure ? View.VISIBLE :View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/matrix"
+                app:layout_constraintLeft_toLeftOf="@id/matrix"
+                app:layout_constraintRight_toRightOf="@id/matrix" />
+
+            <com.example.lifecycle.ui.customview.EnergyImageView
+                android:id="@+id/energy_image"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="60dp"
+                android:background="@color/background"
+                app:layout_constraintBottom_toBottomOf="@id/matrix"
+                app:layout_constraintLeft_toRightOf="@+id/matrix"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/matrix" />
+
+            <LinearLayout
+                android:id="@+id/layout_tool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="@{(data.editMode == EditMode.Measure)||(data.editMode == EditMode.NullMode)? View.GONE :View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/matrix">
+
+                <ImageView
+                    android:id="@+id/image_decline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_fast_rewind_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/image_enhance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_fast_forward_black_24dp" />
+
+                <TextView
+                    android:id="@+id/edit_number"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@{data.editNumber.toString()}"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/image_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_build_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/image_revoke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_history_black_24dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_measure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="@{data.editMode == EditMode.Measure ? View.VISIBLE :View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/matrix">
+
+                <TextView
+                    android:id="@+id/width"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@{data.measureWidth}"
+                    android:textColor="@color/white"
+                    tools:text="宽度：0.5m" />
+
+                <TextView
+                    android:id="@+id/height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@{data.measureHeight}"
+                    android:textColor="@color/white"
+                    tools:text="高度：0.5m" />
+
+                <ImageView
+                    android:id="@+id/image_ensure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_build_black_24dp" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</layout>
